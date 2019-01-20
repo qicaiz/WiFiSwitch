@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_connection_status"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
@@ -41,11 +42,14 @@
                 android:textSize="24sp" />
 
             <android.support.v7.widget.SwitchCompat
-                android:layout_marginRight="@dimen/btn_right_margin"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
+                android:id="@+id/switch1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/btn_right_margin"
+                android:textOff="@string/off"
+                android:textOn="@string/on" />
 
         </RelativeLayout>
 
@@ -77,11 +81,14 @@
                 android:textSize="24sp" />
 
             <android.support.v7.widget.SwitchCompat
-                android:layout_marginRight="@dimen/btn_right_margin"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
+                android:id="@+id/switch2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/btn_right_margin"
+                android:textOff="@string/off"
+                android:textOn="@string/on" />
 
         </RelativeLayout>
 
@@ -112,11 +119,14 @@
                 android:textSize="24sp" />
 
             <android.support.v7.widget.SwitchCompat
-                android:layout_marginRight="@dimen/btn_right_margin"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
+                android:id="@+id/switch3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/btn_right_margin"
+                android:textOff="@string/off"
+                android:textOn="@string/on" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
@@ -146,11 +156,14 @@
                 android:textSize="24sp" />
 
             <android.support.v7.widget.SwitchCompat
-                android:layout_marginRight="@dimen/btn_right_margin"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
+                android:id="@+id/switch4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/btn_right_margin"
+                android:textOff="@string/off"
+                android:textOn="@string/on" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
