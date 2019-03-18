@@ -26,21 +26,43 @@ import java.net.Socket;
 public class MainActivity extends AppCompatActivity implements View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
 
     private final static String TAG = "MainActivity";
-    //首先声明sharedPreference与它的editor对象，必须在onCreate函数中实例化
+    /**
+     * SharedPreferences用于保存自定义开关按钮名称
+     */
     private SharedPreferences mPreferences;
-    //声明sharedPreference的editor
     private SharedPreferences.Editor mEditor;
 
+    /**
+     * Socket
+     */
     private Socket mSocket;
+    /**
+     * 滑动按钮1
+     */
     private SwitchCompat mSwitch1;
+    /**
+     * 滑动按钮2
+     */
     private SwitchCompat mSwitch2;
+    /**
+     * 滑动按钮3
+     */
     private SwitchCompat mSwitch3;
+    /**
+     * 滑动按钮4
+     */
     private SwitchCompat mSwitch4;
+    /**
+     * 连接状态指示
+     */
     private TextView mConnectionStatusTv;
     /**
      * 连接线程
      */
     private ConnectThread mConnectThread;
+    /**
+     * 输出流
+     */
     private PrintStream out;
 
     @Override
@@ -51,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         mPreferences = getPreferences(Activity.MODE_PRIVATE);
         //创建preference的editor对象
         mEditor = mPreferences.edit();
-
+        //初始化控件
         mConnectionStatusTv = findViewById(R.id.tv_connection_status);
         TextView txt1 = findViewById(R.id.txt1);
         TextView txt2 = findViewById(R.id.txt2);
@@ -61,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         txt2.setText(mPreferences.getString(Constants.TXT2_NAME_KEY, Constants.TXT2_NAME_VALUE));
         txt3.setText(mPreferences.getString(Constants.TXT3_NAME_KEY, Constants.TXT3_NAME_VALUE));
         txt4.setText(mPreferences.getString(Constants.TXT4_NAME_KEY, Constants.TXT4_NAME_VALUE));
+        //绑定长按监听
         txt1.setOnLongClickListener(this);
         txt2.setOnLongClickListener(this);
         txt3.setOnLongClickListener(this);
@@ -76,12 +99,22 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         mSwitch4.setOnCheckedChangeListener(this);
     }
 
+    /**
+     * 初始化菜单
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    /**
+     * 菜单点击事件
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.connect) {
@@ -90,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                 mConnectThread = new ConnectThread("192.168.4.1", 333);
                 mConnectThread.start();
             }
-            //断开连接
+            //断开连接，注：该功能尚未添加
             if (mSocket != null && mSocket.isConnected()) {
                 try {
                     mSocket.close();
@@ -103,6 +136,9 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         return true;
     }
 
+    /**
+     * 连接线程
+     */
     private class ConnectThread extends Thread {
         private String ip;
         private int port;
@@ -137,6 +173,11 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         }
     }
 
+    /**
+     * 长按监听事件
+     * @param v
+     * @return
+     */
     @Override
     public boolean onLongClick(View v) {
         final TextView txtView = (TextView) v;
@@ -181,6 +222,11 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         return true;
     }
 
+    /**
+     * 滑动按钮监听事件
+     * @param buttonView
+     * @param isChecked
+     */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
@@ -231,6 +277,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         }
     }
 
+    /**
+     * 发送数据方法
+     * @param data
+     */
     private void sendData(final String data) {
         if (out != null) {
             //开启子线程进行网络IO，主线程禁止网络IO
